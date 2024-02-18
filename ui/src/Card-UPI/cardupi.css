@@ -1,0 +1,98 @@
+
+.card-upi-container
+{
+    display: grid;
+    margin-top: 20px;
+    
+}
+.header,.multi-card
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.header>h4
+{
+    width: 40%;
+    color: #08162c;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 2px solid brown;
+    box-shadow: inset 0px -8px 8px 5px rgba(0, 0, 0, 0.1)
+}
+
+
+.card-upi-block
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.card-block{
+    width: 40%;
+}
+
+.upi-block{
+    display: grid;
+    align-items: center;
+}
+
+.upi-data{
+    display: grid;
+    align-items: center;
+    width: 100%;
+    padding:10px 100px;
+    border-radius: 0.3rem;
+    box-shadow: 20px 20px #0b082c3b;
+    border: 1px solid brown;
+}
+.upi-data>input
+{
+    padding: 10px 10px;
+    border-radius: 5rem;
+}
+.upi-block > button
+{
+    margin-top: 60px;
+    padding: 10px 100px;
+}
+
+.upi-only-block
+{
+    display: grid;
+    place-items: center;
+    margin: 50px;
+    
+}
+.upi-only-block>button
+{
+    margin-top: 20px;
+    padding: 10px 100px;
+}
+
+.upi-only-data
+{
+    border-radius: 0.3rem;
+    box-shadow: 20px 20px #0b082c3b;
+    border: 1px solid brown;
+    padding: 20px 80px;
+    margin-bottom: 20px;
+}
+
+.multi-card-block
+{
+    display: grid;
+    place-items: center;
+}
+
+.multi-card-block>button
+{
+    margin: 20px 0px;
+    padding: 10px 120px;
+}
+
+
+

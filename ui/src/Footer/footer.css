@@ -1,0 +1,64 @@
+footer
+{
+    width: 100%;
+    background:#08162c ;
+    position:relative;
+    bottom: 0;
+    color: white;
+    line-height: 15px;
+    font-size: 13px;
+       
+}
+
+.row
+{
+    width: 85%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.col
+{
+    flex-basis: 25%;
+    padding: 8px;
+}
+
+.col>img
+{
+    margin-bottom: 30px;
+    border-top-left-radius: 0.7rem;
+}
+
+.col h4{
+    width: fit-content;
+    margin-bottom: 40px;
+    position: relative;
+    color: brown;
+}
+
+.email-id
+{
+    width: fit-content;
+    border-bottom: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+.col >p> a{
+    color: white;
+}
+
+hr{
+    background: white;
+    color:white;
+    height: 1px;
+}
+
+.copyright
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
