@@ -10,7 +10,13 @@ const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_API_KEY,
   key_secret: process.env.RAZORPAY_API_SECRET
 });
-app.use(cors())
+app.use(cors(
+  {
+    origin:['https://deploy-mern-1whq.vercel.app'],
+    methods:["POST","GET"],
+    credentials:true
+  }
+))
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 var upiPaymentResult = {};
@@ -32,7 +38,7 @@ app.get('/api/makepayment', async (req, res) => {
           postal_code: "98140",
           country: "US"
         },
-        name: "Rohit Kumar"
+        name: "Amit"
       }
     });
   
@@ -135,7 +141,7 @@ app.get('/api/razorpayPayment', async (req, res) => {
           "key" : "${key}",
           "amount": "600",
           "currency": "INR",
-          "name": "Ajeet",
+          "name": "Amit",
           "description": "Payment",
           "image": "",
           "config" : {
@@ -166,12 +172,12 @@ app.get('/api/razorpayPayment', async (req, res) => {
           "callback_url": "http://localhost:3000/api/verifyupipayment",
           "order_id": "${orderId}",
           "prefill": {
-              "name": "Ajeet Verma",
-              "email": "ajeet@gmail.com",
-              "contact": "1234567890"
+              "name": "Amit",
+              "email": "fastrpayments@gmail.com",
+              "contact": "7411830194"
           },
           "notes": {
-              "address": "IIIT Naya Raipur"
+              "address": "Hyderabad India"
           },
           "theme": {
               "color": "#121212"

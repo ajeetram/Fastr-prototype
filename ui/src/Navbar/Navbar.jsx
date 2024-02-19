@@ -15,7 +15,7 @@ const Navbar = () => {
           <Link className="dropbtn">Services</Link>
           <div className="dropdown-content">
             <Link to='/services/upi'>UPI</Link>
-            <Link to='/services/card'>Card</Link>
+            {/* <Link to='/services/card'>Card</Link> */}
             <Link to='/services/multi-card'>MultiCard</Link>
             <Link to='services/card-upi'>Card-UPI</Link>
           </div>

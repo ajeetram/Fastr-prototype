@@ -1,10 +1,12 @@
 import React,{useState} from 'react'
 import CardForm from '../CardStructure/Components/CardForm'
-const baseApiUrl = 'http://localhost:3000/api';
+// const baseApiUrl = 'https://fastr-api-prototype-server.vercel.app/api';
+const baseApiUrl = 'http://localhost:3000/api'
 
 const MultiCard = () => {
-    const [transactionStatusArray, setTransactionStatusArray] = useState(null);
-
+  const [openModal, setOpenModal] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [transactionStatusArray, setTransactionStatusArray] = useState(null);
     async function makeSamePayment() {
         // parrallel 2 api calls for single payment
         const arr = [baseApiUrl + '/makepayment' + '?payment_method=pm_card_visa', baseApiUrl + '/makepayment'+ '?payment_method=pm_card_mastercard'];
@@ -27,7 +29,8 @@ const MultiCard = () => {
         );
         console.log(responses);
         // set the transaction status in the state
-        // setOpenModal(true);
+        setOpenModal(true);
+        setShowForm(true);
          const transactionStatus = await checkStatusandTakeAction(responses);
         setTransactionStatusArray(transactionStatus.status);
       }
@@ -103,13 +106,40 @@ const MultiCard = () => {
         return statusResponse;
       }
 
+      const closeModal = () => {
+        setTransactionStatusArray(null);
+        setOpenModal(false);
+        setShowForm(false);
+      }
+
   return (
     <div className='multi-card-block'>
+    {!showForm ?
+    <>
     <div className='multi-card'>
       <CardForm />
       <CardForm />
     </div>
     <button className='btn btn-primary' onClick={makeSamePayment}> Pay Now</button>
+    </>:
+    <>
+    {openModal && (
+        <div className="fixed inset-0 z-50 overflow-auto bg-gray-900 bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-8 max-w-md mx-auto rounded-md text-center">
+            <h2 className="text-lg font-semibold mb-4">Transaction Status</h2>
+            <p className="mb-4">{transactionStatusArray && 
+              transactionStatusArray.map((status, index) => (
+                <>
+                <p key={index}>{status.payment_method} Payment with PaymentID : <strong>{status.paymentIntentId} : {status.status} </strong></p>
+                </>
+              ))
+            }</p>
+            <button onClick={closeModal} className="text-black bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 my-5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Close</button>
+          </div>
+        </div>
+      )}
+      </>
+    }
   </div>
   )
 }
