@@ -10,7 +10,13 @@ const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_API_KEY,
   key_secret: process.env.RAZORPAY_API_SECRET
 });
-app.use(cors())
+app.use(cors(
+  {
+    origin:["https://fastr-prototype.vercel.app/"],
+    methods:["POST","GET"],
+    credentials:true
+  }
+))
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 var upiPaymentResult = {};
@@ -110,7 +116,7 @@ app.get("/api/getkey", (req, res) =>
 // UPI Payment
 app.get('/api/makeupipayment', async (req, res) => {
   const options = {
-    amount: Number(6 * 100),
+    amount: Number(100 * 100),
     currency: "INR",
   };
   const order = await razorpay.orders.create(options);
@@ -133,7 +139,7 @@ app.get('/api/razorpayPayment', async (req, res) => {
         <script>
         const options = {
           "key" : "${key}",
-          "amount": "600",
+          "amount": "10000",
           "currency": "INR",
           "name": "Amit",
           "description": "Payment",
