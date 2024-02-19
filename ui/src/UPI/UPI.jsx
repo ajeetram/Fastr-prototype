@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-// const baseApiUrl = 'https://fastr-api-prototype-server.vercel.app/api';
-const baseApiUrl = 'http://localhost:3000/api'
+const baseApiUrl = 'https://fastr-prototype.vercel.app/api'
+//const baseApiUrl = 'http://localhost:3000/api'
 
 const UPI = () =>{
   const [showform, setShowform] = useState(false);
