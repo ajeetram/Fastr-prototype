@@ -10,13 +10,7 @@ const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_API_KEY,
   key_secret: process.env.RAZORPAY_API_SECRET
 });
-app.use(cors(
-  {
-    origin:['https://deploy-mern-1whq.vercel.app'],
-    methods:["POST","GET"],
-    credentials:true
-  }
-))
+app.use(cors())
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 var upiPaymentResult = {};
