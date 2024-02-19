@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import CardForm from '../CardStructure/Components/CardForm'
 import './cardupi.css'
 import axios from "axios";
-// const baseApiUrl = 'https://fastr-api-prototype-server.vercel.app/api';
-const baseApiUrl = 'http://localhost:3000/api'
+const baseApiUrl = 'https://fastr-prototype.vercel.app/api';
+//const baseApiUrl = 'http://localhost:3000/api'
 
 
 const CardUpi = () => {
