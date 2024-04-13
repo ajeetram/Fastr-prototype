@@ -1,0 +1,183 @@
+
+
+.card-payment-box
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 40px;
+}
+
+.card-input-box>button
+{
+    background: linear-gradient(to right, brown, #14667e);
+    border: none;
+    color: white;
+    padding: 10px 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 5px #ccc;
+    transition: background 0.3s ease;
+    
+}
+
+.card-input-box>button:hover
+{
+    background: linear-gradient(to right, rgba(165, 42, 42, 0.919), #14657ee6);
+}
+
+.card-input-box>button:active {
+    box-shadow: 0 3px #ccc;
+    transform: translateY(5px);
+  }
+
+
+.card-scanner-box>img{
+
+    width: 150px;
+    height: 100px;
+}
+
+.card-scanner-box>p
+{
+    text-align: center;
+    color: #14667e;
+    animation: blinker 1s linear infinite;
+    font-weight: bold;
+}
+
+@keyframes blinker{
+    50% { 
+      opacity: 0;
+     }
+  }
+/* .card-input-box
+{
+    border-right: 2px solid #ccc;
+    padding-right:70px ;
+} */
+
+.input-box, .invalid-input-box
+{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+
+}
+
+.input-box>label , .invalid-input-box>label
+{
+    margin-bottom: 5px;
+}
+
+.input-box > input,.invalid-input-box > input {
+    border: 1px solid #ccc;
+    padding: 7px;
+    border-radius: 0.3rem;
+    
+}
+
+/* .invalid-input-box {
+    border: 1px solid red;
+    padding: 7px;
+    border-radius: 0.3rem;
+    
+} */
+
+.input-box > input:focus {
+    border: 1px solid #14667e; 
+}
+
+.invalid-input-box>input:invalid{
+    border: 1px solid red;
+}
+.invalid-input-box>input:valid{
+    border: 1px solid #14667e;
+}
+
+
+.ex-cvv
+{
+    display: flex;
+    gap: 10px;
+}
+
+.modal, .overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.overlay {
+    background: rgba(49,49,49,0.8);
+}
+.modal-content {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: #f1f1f1;
+    padding: 14px 28px;
+    border-radius: 3px;
+    max-width: 600px;
+    min-width: 300px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 7px;
+}
+
+.cardNumber-input-box
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid #ccc;
+    padding: 2px;
+    border-radius: 0.3rem;
+}
+.invalid-cardNumber-input-box
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid red;
+    padding: 2px;
+    border-radius: 0.3rem;
+}
+.cardNumber-input-box-focus
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid #14667e;
+    padding: 2px;
+    border-radius: 0.3rem;
+}
+
+
+
+
+@media screen and (max-width:600px){
+.card-payment-box
+{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+    
+}
+
