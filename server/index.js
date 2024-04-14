@@ -13,6 +13,10 @@ app.use(express.json());
 //routes
 app.use("/api/v1/card",cardRoutes);
 
+app.get('/',(req,res)=>{
+    res.send('Hello world !');
+})
+
 app.listen(PORT,()=>{
     console.log(`server is running on  ${PORT} `)
 })

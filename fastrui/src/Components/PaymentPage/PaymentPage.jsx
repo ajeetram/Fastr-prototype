@@ -40,7 +40,7 @@ const PaymentPage = () => {
   // get all stored card
   const getAllCard = async()=>{
     try {
-      const {data} = await axios.get('https://server-khaki-rho-94.vercel.app/api/v1/card/allCardData');
+      const {data} = await axios.get('https://fastr-pay.vercel.app/api/v1/card/allCardData');
       setCards(data?.data);  
     } catch (error) {
       toast.error('error while fetching all card data')
