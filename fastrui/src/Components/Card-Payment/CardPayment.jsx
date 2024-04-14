@@ -18,7 +18,8 @@ const UpdatedCard = ({ getAllCard }) => {
   const [isInputValid, setIsInputValid] = useState(true);
   
 
-  const createCard = async () => {
+  const createCard = async (e) => {
+    e.preventDefault();
     try {
       if(cardName.length===0 || cardNumber.length===0 || expiryDate.length===0|| cvv.length===0 )
       {
