@@ -11,6 +11,7 @@ import { ArrowRightAlt, Close,Delete } from "@mui/icons-material";
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
 import Switch from '@mui/material/Switch';
+import BouncingLoader from "../Loader/BouncingLoader";
 import axios from 'axios'
 import toast from "react-hot-toast";
 import CreditLine from "../CreditLine/CreditLine";
@@ -33,6 +34,8 @@ const PaymentPage = () => {
   const [enterAmnt, setEnterAmnt] = useState(new Array(5).fill(0));
   const [idx,setIdx] = useState(0);
   const [sumOfSplitMoney,setSumOfSplitMonay] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [count, setCount] = useState(0);
 
 
   let total = 408;
@@ -40,8 +43,15 @@ const PaymentPage = () => {
   // get all stored card
   const getAllCard = async()=>{
     try {
-      const {data} = await axios.get('https://fastr-pay.vercel.app/api/v1/card/allCardData');
-      setCards(data?.data);  
+      const {data} = await axios.get('https://fastr-prototype.vercel.app/api/v1/card/allCardData');
+      setCards(data?.data);
+      
+      if(data.success)
+      {
+        setCount(data.data.length);
+        setIsLoading(false);
+      }
+         
     } catch (error) {
       toast.error('error while fetching all card data')
     }
@@ -52,7 +62,7 @@ const PaymentPage = () => {
   const handleUpdateCard = async (id) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:3032/api/v1/card/updateCard/${id}`,
+        `https://fastr-prototype.vercel.app/api/v1/card/updateCard/${id}`,
         {
           cardName:updatedCardName,
           cardNumber:updatedCardNumber,
@@ -75,7 +85,8 @@ const PaymentPage = () => {
 
   const deleteCard = async(cId)=>{
     try {
-      const {data} = await axios.delete(`http://localhost:3032/api/v1/card/deleteCard/${cId}`)
+      
+      const {data} = await axios.delete(`https://fastr-prototype.vercel.app/api/v1/card/deleteCard/${cId}`)
 
       if(data.success)
       {
@@ -131,10 +142,15 @@ const removeCard = (index)=>{
 }
 
 
-
   useEffect(() => {
+    
     getAllCard();
+    
     let length = copiedCard.length;
+    if(length===0)
+    {
+      setIsLoading(true);
+    }
     let eachPrice = (total/length).toFixed(2);
     setSplitAmount(eachPrice);
     let sum = length*eachPrice;
@@ -156,7 +172,11 @@ const removeCard = (index)=>{
         </div>
         <div className="billing">
           <h3>Payment Option</h3>
+          <p style={{color:"green"}}>saved cards : <strong style={{color:"#14667e"}}>{count}</strong></p>
           {
+            isLoading?
+            <BouncingLoader />
+            :
             cards?.map((data,i)=>{
               return(
                 <div key={i+1} className="cardDataBar">

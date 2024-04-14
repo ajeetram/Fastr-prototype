@@ -24,10 +24,11 @@ const UpdatedCard = ({ getAllCard }) => {
       {
         toast.error('Please provide all input details')
         setIsInputValid(false);
+        
       }
       else{
       const { data } = await axios.post(
-        "http://localhost:3032/api/v1/card/create-card",
+        "https://fastr-prototype.vercel.app/api/v1/card/create-card",
         {
           cardName,
           cardNumber,
