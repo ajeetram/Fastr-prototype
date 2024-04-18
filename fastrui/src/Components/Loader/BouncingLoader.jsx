@@ -1,12 +1,11 @@
-import React from 'react'
-import './loader.css'
+import React from "react";
+import "./loader.css";
 const BouncingLoader = () => {
   return (
     <div className="dot-loader">
-    <div className="loader">
+      <div className="loader"></div>
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default BouncingLoader
+export default BouncingLoader;

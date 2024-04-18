@@ -1,21 +1,17 @@
 import React from 'react'
 import './transactionLoader.css'
+import BouncingLoader from './BouncingLoader'
 const TransactionLoader = () => {
   return (
-<div className="payment-loader-container">
-  <div className="payment-loader">
-    <div className="payment-circle">
-      <div className="payment-inner-circle">
-      </div>
-      <p>
-   payment
-      </p>
-      <p>
-   proccessing...
-      </p>
+    <div className="modal">
+    <div className="overlay"></div>
+    <div className="modal-content">
+    <div className='transaction-loader'>
+    Payment Initiating... <BouncingLoader />
     </div>
-  </div>
-</div>
+    </div>
+    </div>
+
   )
 }
 

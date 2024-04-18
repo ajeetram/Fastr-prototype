@@ -256,6 +256,21 @@
   border-radius: 0.3rem;
   width: 30%;
 }
+.update-upi-input-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.update-upi-input-box > label {
+  margin-bottom: 5px;
+}
+
+.update-upi-input-box > input {
+  border: 1px solid #ccc;
+  padding: 7px;
+  border-radius: 0.3rem;
+}
+
 
 .upi-box > button {
   background: linear-gradient(to right, brown, #14667e);
@@ -266,11 +281,17 @@
   margin: 10px 0px;
   cursor: pointer;
   font-size: 16px;
+  box-shadow: 0 5px #ccc;
   transition: background 0.3s ease;
 }
 
 .upi-box > button:hover {
   background: linear-gradient(to right, rgba(165, 42, 42, 0.388), #14657eaf);
+}
+.upi-box>button:active
+{
+  box-shadow: 0 2px #ccc;
+  transform: translateY(5px);
 }
 
 /* For screens smaller than 768px (tablets and below) */
