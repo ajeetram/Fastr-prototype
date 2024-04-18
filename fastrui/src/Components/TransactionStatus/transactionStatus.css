@@ -1,0 +1,50 @@
+.transaction-status {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .transaction-status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .transaction-status-body {
+    margin-top: 20px;
+  }
+  
+  .transaction-status-footer {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .transaction-confirmation
+  {
+    color: #5cb85c;
+  }
+
+  .merchant-name
+  {
+    width: fit-content;
+  background: linear-gradient(90deg, brown, #14667e);
+ -webkit-background-clip: text;
+ background-clip: text;
+ -webkit-text-fill-color: transparent;
+  }
+  
+  button {
+    margin-right: 10px;
+    background:brown;
+    padding:10px;
+    border-radius: 0.2rem;
+    color: white;
+  }
+
+  button:hover{
+    background:rgba(165, 65, 42, 0.991);
+    cursor: pointer;
+  }

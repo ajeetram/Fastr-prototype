@@ -3,6 +3,7 @@ import "./App.css";
 import { AnimatePresence } from "framer-motion";
 import {Toaster} from 'react-hot-toast'
 import PaymentPage from './Components/PaymentPage/PaymentPage.jsx';
+
 function App() {
   return (
     <div>

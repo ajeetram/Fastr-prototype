@@ -1,0 +1,58 @@
+@keyframes pulsate {
+    0% {
+      transform: scale(0.75);
+    }
+    50% {
+      transform: scale(1.75);
+    }
+    100% {
+      transform: scale(0.75);
+    }
+  }
+  
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .payment-loader-container {
+    margin: 25vh auto 0;
+  }
+  
+  .payment-loader {
+    width: 125px;
+    height: 125px;
+    margin: 0 auto;
+  }
+  
+  .payment-circle {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 5px double #14657e;
+  }
+  
+  .payment-inner-circle {
+    position: relative;
+    left: -12.5%;
+    top: 35%;
+    width: 125%;
+    height: 25%;
+    background-color: white;
+    animation: rotate 2s infinite linear;
+  }
+  
+  .payment-circle p {
+    position: relative;
+    color: brown;
+    margin-top: 10px;
+    top: -0.5em;
+    font-family: 'Raleway';
+    animation: pulsate 1.25s infinite ease;
+  }
+  

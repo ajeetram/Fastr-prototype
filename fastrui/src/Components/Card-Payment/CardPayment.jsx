@@ -6,9 +6,10 @@ import toast from "react-hot-toast";
 import amex from "../Images/amex.png";
 import mastercard from "../Images/mastercard.png";
 import visa from "../Images/visa-.png";
+import {motion } from "framer-motion";
 import { CiCreditCard1 } from "react-icons/ci";
 
-const UpdatedCard = ({ getAllCard }) => {
+const UpdatedCard = ({ getAllCard, setIsLoading }) => {
   const [cardName, setCardName] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
@@ -28,6 +29,8 @@ const UpdatedCard = ({ getAllCard }) => {
         
       }
       else{
+        
+        setIsLoading(true);
       const { data } = await axios.post(
         "https://fastr-prototype.vercel.app/api/v1/card/create-card",
         {
@@ -37,10 +40,10 @@ const UpdatedCard = ({ getAllCard }) => {
           cvv,
         }
       );
-
       if (data.success) {
         toast.success(data.message);
         getAllCard();
+        setIsLoading(false);
         setCardName("");
         setCardNumber("");
         setExpiryDate("");
@@ -87,7 +90,11 @@ const UpdatedCard = ({ getAllCard }) => {
 
   return (
     <>
-      <form className="card-payment-box">
+      <motion.form className="card-payment-box"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      >
         <div className="card-input-box">
           <div className={isInputValid?"input-box":"invalid-input-box"}>
             <label>Name on Card</label>
@@ -152,7 +159,7 @@ const UpdatedCard = ({ getAllCard }) => {
           <img src={cardscanner} alt="scanner-img" />
           <p>Scan the Card</p>
         </div>
-      </form>
+      </motion.form>
       
     </>
   );

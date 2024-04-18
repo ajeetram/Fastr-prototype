@@ -15,6 +15,7 @@ import BouncingLoader from "../Loader/BouncingLoader";
 import axios from 'axios'
 import toast from "react-hot-toast";
 import CreditLine from "../CreditLine/CreditLine";
+import { motion } from 'framer-motion';
 
 
 const PaymentPage = () => {
@@ -22,8 +23,9 @@ const PaymentPage = () => {
   const [selectedItem,setSelectedItem] = useState("card");
   const [showModal, setShowModal] = useState(false);
   const [cards, setCards] = useState([]);
-  const [copiedCard, setCopiedCard] = useState([]);
+  const [copiedCard, setCopiedCard] = useState(new Array(5).fill(0));
   const [checkedState, setCheckedState] = useState(new Array(5).fill(false));
+  const [isChecked, setIsChecked] = useState(true);
   const [updatedCardName, setUpdatedCardName] = useState("");
   const [updatedCardNumber, setUpdatedCardNumber] = useState("");
   const [updatedExpiryDate, setUpdatedExpiryDate] = useState("");
@@ -33,13 +35,14 @@ const PaymentPage = () => {
   const [splitAmount, setSplitAmount] = useState();
   const [enterAmnt, setEnterAmnt] = useState(new Array(5).fill(0));
   const [idx,setIdx] = useState(0);
+  const [checkIdx, setCheckIdx] = useState();
   const [sumOfSplitMoney,setSumOfSplitMonay] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [count, setCount] = useState(0);
+  const [copiedDatalength, setCopiedDataLength] = useState(0);
 
 
   let total = 408;
-  
   // get all stored card
   const getAllCard = async()=>{
     try {
@@ -83,15 +86,21 @@ const PaymentPage = () => {
 
   // delete card by its id
 
-  const deleteCard = async(cId)=>{
+  const deleteCard = async(cId,index)=>{
     try {
-      
+      const toastId = toast.loading('please wait...')
       const {data} = await axios.delete(`https://fastr-prototype.vercel.app/api/v1/card/deleteCard/${cId}`)
-
+      
       if(data.success)
       {
+        toast.dismiss(toastId);
         toast.success(data.message);
+        setCheckedState(new Array(5).fill(false));
+        setCopiedCard(new Array(5).fill(0));
+        setEnterAmnt(new Array(5).fill(0));
+        setCopiedDataLength(0);
         getAllCard();
+
       }
       
       
@@ -112,14 +121,23 @@ const PaymentPage = () => {
     
   
     if (updatedCheckedState[position]) {
-      setCopiedCard([...copiedCard, data]); 
-      console.log(updatedCheckedState);
+      const newArray = [...copiedCard];
+     newArray[position] = data;
+      setCopiedCard(newArray); 
+      let length = copiedDatalength+1;
+      setCopiedDataLength(length);
       
     } 
     else {
       // If checkbox is unchecked, return the rest checked data
-      const filteredData = cards.filter((item, index) => updatedCheckedState[index]);
-      setCopiedCard(filteredData);
+      setCheckIdx(position)
+      // const filteredData = cards.filter((item, index) => updatedCheckedState[index]);
+      // setCopiedCard(filteredData);
+      const newArray = [...copiedCard];
+     newArray[position] = 0;
+      setCopiedCard(newArray);
+      let length = copiedDatalength-1;
+      setCopiedDataLength(length);
     }
   };
 
@@ -127,18 +145,29 @@ const PaymentPage = () => {
 
   const handlerAmount = (index,value)=>{
     const newArray = [...enterAmnt];
+    console.log('i and',index,value,newArray);
     newArray[index] = value;
     setEnterAmnt(newArray);
     const sum = newArray.reduce((accumulator, currentValue) => accumulator + Number(currentValue), 0);
     setSumOfSplitMonay(sum);
-    console.log('i and val',index,value,newArray);
+    console.log('i and val',index,value,newArray,sum);
+
   }
   
 // handle remove card from checkout
 
 const removeCard = (index)=>{
-  const filteredData = copiedCard.filter((data,i)=>i!==index);
-  setCopiedCard(filteredData);
+  console.log('before',checkedState)
+  const copiedarray = [...copiedCard]
+  copiedarray[index] = 0;
+  setCopiedCard(copiedarray);
+  let length = copiedDatalength-1;
+  setCopiedDataLength(length);
+  const array = [...checkedState];
+  array[index] = false;
+  setCheckedState(array);
+  console.log('check',checkedState)
+
 }
 
 
@@ -146,20 +175,27 @@ const removeCard = (index)=>{
     
     getAllCard();
     
-    let length = copiedCard.length;
-    if(length===0)
+    if(copiedDatalength===0)
+    setIsLoading(true);
+    
+    if(copiedDatalength!==0)
     {
-      setIsLoading(true);
-    }
-    let eachPrice = (total/length).toFixed(2);
+    let eachPrice = (total/copiedDatalength).toFixed(2);
     setSplitAmount(eachPrice);
-    let sum = length*eachPrice;
-    for(let i=0;i<length;i++)
+    let sum = copiedDatalength*eachPrice;
+    for(let i=0;i<5;i++)
     {
+      if(i<copiedDatalength)
+      {
       enterAmnt[i] = eachPrice;
+      }
+      else{
+        enterAmnt[i]=0;
+      }
     }
     setSumOfSplitMonay(sum);
-  }, [copiedCard.length,total]);
+  }
+  }, [checkedState,copiedDatalength]);
 
   return (
     <>
@@ -262,7 +298,7 @@ const removeCard = (index)=>{
             
           </div>
           {selectedItem === "card" && (
-            <UpdatedCard getAllCard = {getAllCard}/>
+            <UpdatedCard getAllCard = {getAllCard} setIsLoading = {setIsLoading}/>
           )}
           {selectedItem === "netbanking" && <NetBanking />}
           {selectedItem === "e-wallet" && <ECurrency />}
@@ -310,25 +346,32 @@ const removeCard = (index)=>{
           <h5>${total}</h5>
         </div>
           <div className="split-checkout-box">
-            {copiedCard.length !==0?<div className="split-bar">
+            {copiedDatalength !==0?<div className="split-bar">
               <p>
                 <strong>After Split</strong>(Amount is editable){" "}
               </p>
             </div>:""}
             {
           copiedCard.map((item,i)=>{
+            if(item!==0)
+            {
             return(
             <>
-                <div key={i+1} className="cardData-box">
+                <motion.div
+                 key={i+1} className="cardData-box"
+                 initial={{ opacity: 0 }}
+                 animate={{ opacity: 1 }}
+                 exit={{ opacity: 0 }}
+                 >
                 
                   <div className="card-value">
                   <div className="edit-del">
                     <ModeEditOutlinedIcon
                     style={{color:"#007bff"}}
-                    onClick={() => {setShowModal(true);setIdx(i+1)}} />
+                    onClick={() => {setShowModal(true);setIdx(i)}} />
                     <HighlightOffOutlinedIcon
                     style={{color:"#dc3545"}}
-                      onClick={() => {handlerAmount(i,0);removeCard(i)
+                      onClick={() => {removeCard(i);
                       }}
                     />
                   </div>
@@ -337,8 +380,8 @@ const removeCard = (index)=>{
                   <div className="card-value">
                     <span>${enterAmnt[i]===0?splitAmount:enterAmnt[i]}</span>
                   </div>
-                </div>
-                {showModal && idx===i+1 ? (
+                </motion.div>
+                {showModal && idx===i ? (
                   <div className="input-modal">
                     <div className="modal-close-icon">
                       <Close onClick={()=>{setShowModal(false); handlerAmount(i,splitAmount)}} />
@@ -355,12 +398,18 @@ const removeCard = (index)=>{
                     ></input>
                   </div>):""}
             </>
-            )})
+            )
+            }
+            else
+            {
+              return null
+            }
+            })
             }
 
             </div>
 
-        {copiedCard.length !==0 ? (
+        {copiedDatalength !==0 ? (
           <div className="total-value">
             <h5>Total</h5>
             <h5 className={sumOfSplitMoney===total?"validTotal":"invalidTotal"}>${sumOfSplitMoney}</h5>
@@ -369,9 +418,9 @@ const removeCard = (index)=>{
           ""
         )}
         <button
-          disabled={copiedCard.length !==0 ? false : true}
+          disabled={copiedDatalength !==0 ? false : true}
           className={
-            copiedCard.length !==0
+            copiedDatalength !==0
               ? "enable-place-order-button"
               : "disable-place-order-button"
           }

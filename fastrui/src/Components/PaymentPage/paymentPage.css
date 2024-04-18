@@ -94,6 +94,14 @@
   margin-top: 10px;
 }
 
+.billing>h3{
+  width: fit-content;
+  background: linear-gradient(90deg, brown, #14667e);
+ -webkit-background-clip: text;
+ background-clip: text;
+ -webkit-text-fill-color: transparent;
+}
+
 .payment-option {
   display: flex;
   justify-content: flex-start;
@@ -263,6 +271,52 @@
 
 .upi-box > button:hover {
   background: linear-gradient(to right, rgba(165, 42, 42, 0.388), #14657eaf);
+}
+
+/* For screens smaller than 768px (tablets and below) */
+@media only screen and (max-width: 768px) {
+  .card-payment-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .payment-box {
+    margin-left: 0;
+    margin-bottom: 20px;
+  }
+
+  .payment-option {
+    flex-wrap: wrap;
+  }
+
+  .payment-element,
+  .payment-element_ {
+    width: 50%;
+  }
+
+  .order-box {
+    margin-right: 0;
+  }
+
+  .order-box > h3 {
+    margin-top: 20px;
+  }
+}
+
+/* For screens smaller than 480px (phones and below) */
+@media only screen and (max-width: 480px) {
+  .cardDataBar {
+    flex-direction: column;
+  }
+
+  .edit-del-btn {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .input-modal > input {
+    width: 100%;
+  }
 }
 
 
