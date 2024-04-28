@@ -46,7 +46,12 @@
     color: white;
   }
 
-  button:hover{
+  .transaction-details
+  {
+    margin-bottom: 10px;
+  }
+
+  .transaction-status-footer>button:hover{
     background:rgba(165, 65, 42, 0.991);
     cursor: pointer;
   }

@@ -171,7 +171,8 @@
 {
     border-bottom: 1px solid #ccc;
 }
-.disable-place-order-button {
+
+.order-box>button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -182,21 +183,23 @@
   border-radius: 0.2rem;
   cursor: pointer;
   text-transform: uppercase;
-}
 
-.enable-place-order-button {
+}
+.order-box>button:enabled {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px 0px;
   width: 100%;
-  margin-top: 40px;
-  margin-bottom: 10px;
+  margin: 10px 0px;
   background-color: darkorange;
   border-radius: 0.2rem;
   cursor: pointer;
   text-transform: uppercase;
+  
+  
 }
+
 
 .input-modal
 {
@@ -327,17 +330,40 @@
 /* For screens smaller than 480px (phones and below) */
 @media only screen and (max-width: 480px) {
   .cardDataBar {
-    flex-direction: column;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  padding: 10px 5px;
+  background-color: #ccc;
+  border-radius: 0.2rem;
+  margin: 10px 0px;
+  width: 200px;
+
   }
 
-  .edit-del-btn {
-    flex-direction: column;
+  .edit-del {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .payment-option {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #cccc;
+    border-radius: 0.2rem;
     gap: 10px;
+    width: 360px;
   }
 
-  .input-modal > input {
-    width: 100%;
-  }
 }
 
 

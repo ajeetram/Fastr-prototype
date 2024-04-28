@@ -177,11 +177,11 @@ const UpdatedCard = ({ getAllCard, setIsLoading }) => {
             Save
           </button>
         </div>
-        <p>or</p>
+        {/* <p>or</p>
         <div className="card-scanner-box">
           <img src={cardscanner} alt="scanner-img" />
           <p>Scan the Card</p>
-        </div>
+        </div> */}
       </motion.form>
     </>
   );

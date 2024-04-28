@@ -7,7 +7,7 @@ const TransactionLoader = () => {
     <div className="overlay"></div>
     <div className="modal-content">
     <div className='transaction-loader'>
-    Payment Initiating... <BouncingLoader />
+    Payment processing... <BouncingLoader />
     </div>
     </div>
     </div>
