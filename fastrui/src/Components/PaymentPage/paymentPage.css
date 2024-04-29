@@ -224,8 +224,19 @@
 {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
+    
 }
+
+.modal-close-icon>button{
+  padding: 5px 10px;
+  border-radius: 0.2rem;
+  background-color: #14667e;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
 
 .edit-del-btn
 {
