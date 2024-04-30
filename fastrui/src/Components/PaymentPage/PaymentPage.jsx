@@ -268,6 +268,7 @@ const PaymentPage = () => {
     }
     console.log(paymentMethods);
     setPaymentData(paymentMethods);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checkedState, copiedDataLength, checkedStateUpi]);
 
   useEffect(() => {
