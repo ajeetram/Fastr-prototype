@@ -9,7 +9,7 @@ import visa from "../Images/visa-.png";
 import { motion } from "framer-motion";
 import { CiCreditCard1 } from "react-icons/ci";
 
-const UpdatedCard = ({ getAllCard, setIsLoading }) => {
+const UpdatedCard = ({ getAllCard}) => {
   const [cardName, setCardName] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
@@ -30,7 +30,7 @@ const UpdatedCard = ({ getAllCard, setIsLoading }) => {
         toast.error("Please provide all input details");
         setIsInputValid(false);
       } else {
-        setIsLoading(true);
+        
         const { data } = await axios.post(
           "https://fastr-prototype.vercel.app/api/v1/card/create-card",
           {
