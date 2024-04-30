@@ -207,7 +207,7 @@
     z-index: 2;
     background-color: #ccc;
     border-radius: 0.3rem;
-    padding: 10px 20px;
+    padding: 10px 15px;
     cursor: pointer;
     color: #14667e;
     margin-top: -60px;
@@ -224,11 +224,18 @@
 {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+    
+}
+.modal-close-icon-center
+{
+    display: flex;
+    align-items: center;
     justify-content: center;
     
 }
 
-.modal-close-icon>button{
+.modal-close-icon-center>button{
   padding: 5px 10px;
   border-radius: 0.2rem;
   background-color: #14667e;
