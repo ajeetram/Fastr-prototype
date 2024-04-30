@@ -242,6 +242,8 @@ const PaymentPage = () => {
       setSumOfSplitMonay(sum);
     }
     for (let i = 0; i < copiedCard.length; i++) {
+      if(copiedCard[i])
+      {
       paymentMethodItem = {
         method: "card",
         cardHolderName: copiedCard[i].cardName,
@@ -252,6 +254,7 @@ const PaymentPage = () => {
       };
       // console.log(paymentMethodItem);
       paymentMethods.push(paymentMethodItem);
+    }
     }
     for (let i = 0; i < copiedUpiHandle.length; i++) {
       if (copiedUpiHandle[i] !== 0) {
@@ -503,7 +506,7 @@ const PaymentPage = () => {
                             setSplitAmount(e.target.value);
                           }}
                         ></input>
-                        <div className="modal-close-icon">
+                        <div className="modal-close-icon-center">
                           <button
                             onClick={() => {
                               setShowModal(false);
@@ -571,7 +574,7 @@ const PaymentPage = () => {
                             setSplitAmount(e.target.value);
                           }}
                         ></input>
-                        <div className="modal-close-icon">
+                        <div className="modal-close-icon-center">
                           <button
                             onClick={() => {
                               setShowModalUpi(false);
