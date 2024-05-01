@@ -45,6 +45,8 @@
   gap: 20px;
   border-radius: 0.2rem;
 }
+
+
 .card-value>span
 {
     color: #14667e;
@@ -74,6 +76,7 @@
   padding-right: 10px;
   border-right: 2px solid #ccc;
 }
+
 .payment-element_ {
   display: flex;
   justify-content: flex-start;
@@ -277,6 +280,7 @@
   border-radius: 0.3rem;
   width: 30%;
 }
+
 .update-upi-input-box {
   display: flex;
   flex-direction: column;
@@ -320,6 +324,7 @@
   .card-payment-container {
     display: flex;
     flex-direction: column;
+    margin: 5px 10px;
   }
 
   .payment-box {
@@ -347,6 +352,7 @@
 
 /* For screens smaller than 480px (phones and below) */
 @media only screen and (max-width: 480px) {
+
   .cardDataBar {
   display: flex;
   justify-content: flex-start;
@@ -357,16 +363,13 @@
   background-color: #ccc;
   border-radius: 0.2rem;
   margin: 10px 0px;
-  width: 200px;
-
+  width: 250px;
   }
 
-  .edit-del {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
+  .payment-element {
+    border-right: none;
+    padding: 10px 0px;
+    border-bottom: 2px solid #ccc;
   }
 
   .payment-option {
@@ -379,7 +382,7 @@
     border: 1px solid #cccc;
     border-radius: 0.2rem;
     gap: 10px;
-    width: 360px;
+    width: 330px;
   }
 
 }
