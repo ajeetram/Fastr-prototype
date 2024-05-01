@@ -17,6 +17,7 @@ const UpdatedCard = ({ getAllCard}) => {
   const [cardBrand, setCardBrand] = useState("");
   const [inputBorder, setInputBorder] = useState(false);
   const [isInputValid, setIsInputValid] = useState(true);
+  const [isLoading , setIsLoading] = useState(false);
 
   const createCard = async (e) => {
     e.preventDefault();

@@ -172,6 +172,53 @@ async function makeCardAndUPIPayment(cardData, upiData) {
   }
 }
 
+async function makeUPIPayments(upiData){
+  const responses = await Promise.all(
+    upiData.map(async (data) => {
+      try {
+        // Fetching the key
+        const { data: { key } } = await axios.get(`${baseApiUrl}/getkey`);
+  
+        // Fetching the order
+        const { data: { order } } = await axios.get(`${baseApiUrl}/makeupipayment?amount=${data.amount}`);
+  
+        // Open a new popup window for the Razorpay payment
+        const paymentWindow = window.open(`${baseApiUrl}/razorpayPayment?order_id=${order.id}&key=${key}`, '_blank' ,'Razorpay', 'width=800,height=600');
+        
+        // Return a new promise that resolves when the payment status is fetched
+        return new Promise((resolve, reject) => {
+          // Poll to check if the window is closed
+          const pollTimer = window.setInterval(async function() {
+            if (paymentWindow.closed) {
+              window.clearInterval(pollTimer);
+  
+              // Verify the payment status
+              try {
+                const response = await fetch(`${baseApiUrl}/upipaymentstatus`);
+                const paymentStatus = await response.json();
+                console.log(paymentStatus);
+                resolve(paymentStatus); // Resolve the outer promise with the payment status
+              } catch (error) {
+                reject(error); // Reject the outer promise if there's an error
+              }
+            }
+          }, 200);
+        });
+      } catch (error) {
+        console.error("Error processing payment:", error);
+        throw error;
+      }
+    })
+  );
+
+  console.log(responses);
+  
+  const upiStatus1 = {payment_method : "UPI"  , paymentIntentId: responses[0].reference, status: responses[0].success ? 'succeeded' : 'failed'};
+  const upiStatus2 = {payment_method : "UPI"  , paymentIntentId: responses[1].reference, status: responses[1].success ? 'succeeded' : 'failed'};
+  transactionStatusArray.push({status : [upiStatus1, upiStatus2]});
+  return transactionStatusArray;
+}
+
 async function makePayment(paymentData) {
   console.log('Payment data: ', paymentData);
     let cardData = [];
@@ -193,6 +240,9 @@ async function makePayment(paymentData) {
     else{
       if(cardData.length > 0) {
         await cardPayment(cardData);
+      }
+      else if(upiData.length > 0) {
+        await makeUPIPayments(upiData);
       }
     }
     console.log(transactionStatusArray);
